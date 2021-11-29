@@ -27,7 +27,7 @@ export default function HomeNavbar() {
     return (
         <React.Fragment>
             <AppBar 
-                color="customColor"
+                color="primary"
                 className={`${classes.customColor} ${classes.customHeight}`}
             >
                 <Toolbar>

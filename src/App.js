@@ -1,9 +1,9 @@
-import HomeNavbar from "./components/homeNavbar/homeNavbar";
+import ChallengePage from "./components/challengesPage/challengePage";
 
 function App() {
   return (
     <div>
-      <HomeNavbar />
+      <ChallengePage />
     </div>
   );
 }
