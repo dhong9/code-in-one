@@ -1,11 +1,11 @@
-import React from "react";
+import React, {Component} from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import green from "@material-ui/core/colors/green";
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
     menuButton: {
         marginRight: theme.spacing(2)
     },
@@ -20,21 +20,27 @@ const useStyles = makeStyles((theme) => ({
         minHeight: 64
     },
     offset: theme.mixins.toolbar
-}));
+});
 
-export default function HomeNavbar() {
-    const classes = useStyles();
-    return (
-        <React.Fragment>
-            <AppBar 
-                color="primary"
-                className={`${classes.customColor} ${classes.customHeight}`}
-            >
-                <Toolbar>
-                    {/* Navbar contents go here. */}
-                    <img src={process.env.PUBLIC_URL + "/home.png"} width="150" height="32" alt="Home" />
-                </Toolbar>
-            </AppBar>
-        </React.Fragment>
-    );
+class HomeNavbar extends Component {
+
+    render() {
+        const { classes } = this.props;
+        return (
+            <React.Fragment>
+                <AppBar 
+                    color="primary"
+                    className={`${classes.customColor} ${classes.customHeight}`}
+                >
+                    <Toolbar>
+                        {/* Navbar contents go here. */}
+                        <img src={process.env.PUBLIC_URL + "/home.png"} width="150" height="32" alt="Home" />
+                    </Toolbar>
+                </AppBar>
+                <Toolbar />
+            </React.Fragment>
+        );
+    }
 }
+
+export default withStyles(styles)(HomeNavbar);

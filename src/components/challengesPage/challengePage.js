@@ -1,25 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 
 import HomeNavbar from '../homeNavbar/homeNavbar';
 import Challenge from '../challenge/challenge';
 
-export default function ChallengePage() {
-    const [challenges, setChallenges] = useState([]);
+import './challengePage.css';
 
-    useEffect(_ => {
-        fetch("http://127.0.0.1:8000/challenges/")
+class ChallengePage extends Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            challenges: []
+        };
+    }
+
+    componentDidMount() {
+        fetch("https://dhong9.pythonanywhere.com/api/challenges/")
             .then(response => response.json())
-            .then(data => setChallenges(data.results));
-    }, [])
+            .then(data => 
+                this.setState(_ => ({
+                    challenges: data.data
+                }))
+            );
+    }
 
-    return (
-        <React.Fragment>
-            <HomeNavbar />
-            {
-                challenges.map(challenge =>
-                    <Challenge />
-                )
-            }
-        </React.Fragment>
-    );
+    render() {
+        return (
+            <React.Fragment>
+                <HomeNavbar />
+                <div className="inside">
+                {
+                    this.state.challenges.map((challenge, i) =>
+                        <Challenge 
+                            key={i}
+                            {...challenge}
+                        />
+                    )
+                }
+                </div>
+            </React.Fragment>
+        );
+    }
 }
+
+export default ChallengePage;
