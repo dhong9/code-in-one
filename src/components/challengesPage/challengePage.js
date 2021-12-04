@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import HomeNavbar from '../homeNavbar/homeNavbar';
-import Challenge from '../challenge/challenge';
+import ChallengeCard from '../challengeCard/challengeCard';
 
 import './challengePage.css';
 
@@ -32,7 +32,7 @@ class ChallengePage extends Component {
                 <div className="inside">
                 {
                     this.state.challenges.map((challenge, i) =>
-                        <Challenge 
+                        <ChallengeCard 
                             key={i}
                             {...challenge}
                         />

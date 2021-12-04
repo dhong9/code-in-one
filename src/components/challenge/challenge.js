@@ -1,24 +1,28 @@
-import React, { Component } from "react";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from "@material-ui/core/Typography";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router"
 
-import './challenge.css';
+import ChallengeNavbar from "../challengeNavbar/challengeNavbar";
 
-class Challenge extends Component {
+export default function Challenge() {
+    const params = useParams();
 
-    render() {
-        return (
-            <Card className="challengeCard">
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {this.props.challengeName}
-                    </Typography>
-                </CardContent>
-            </Card>
-        );
-    }
+    const [challengeData, setChallengeData] = useState({});
 
+    useEffect(() =>
+        fetch("https://dhong9.pythonanywhere.com/api/challenges/" + params.id)
+            .then(response => response.json())
+            .then(data => setChallengeData(data.data)),
+        [params.id]);
+
+    return challengeData.id ? (
+        <React.Fragment>
+            <ChallengeNavbar 
+                {...challengeData}
+            />
+        </React.Fragment>
+    ) : (
+        <div>
+            <h2>Loading...</h2>
+        </div>
+    )
 }
-
-export default Challenge;
