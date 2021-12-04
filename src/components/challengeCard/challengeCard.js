@@ -10,7 +10,7 @@ class ChallengeCard extends Component {
 
     render() {
         return (
-            <Link to={`/challenge/${this.props.id}`}>
+            <Link to={`/code-in-one/challenge/${this.props.id}`}>
                 <Card className="challengeCard">
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">

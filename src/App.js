@@ -10,8 +10,8 @@ function App() {
   return (
     <Router>
         <Routes>
-          <Route path="/" element={<ChallengePage />} />
-          <Route path="challenge/:id" element={<Challenge />} />
+          <Route path="/code-in-one/" element={<ChallengePage />} />
+          <Route path="/code-in-one/challenge/:id" element={<Challenge />} />
         </Routes>
     </Router>
   );
