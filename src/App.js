@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
         <Routes>
-          <Route exact path="/" element={<ChallengePage />} />
+          <Route path="/" element={<ChallengePage />} />
           <Route path="challenge/:id" element={<Challenge />} />
         </Routes>
     </Router>
