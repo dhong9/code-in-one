@@ -18,7 +18,8 @@ const styles = theme => ({
         backgroundColor: green[500]
     },
     customHeight: {
-        minHeight: 40
+        minHeight: 40,
+        zIndex: 1201
     },
     offset: theme.mixins.toolbar
 });
@@ -32,6 +33,7 @@ class ChallengeNavbar extends Component {
                 <AppBar 
                     color="primary"
                     className={`${classes.customColor} ${classes.customHeight}`}
+                    position="fixed"
                 >
                     <Toolbar>
                         {/* Navbar contents go here. */}
