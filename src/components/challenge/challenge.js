@@ -54,7 +54,7 @@ export default function Challenge() {
                 flexShrink: 0,
                 [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
                 }}
-          >
+            >
               <Toolbar />
               <Box sx={{ overflow: 'auto' }}>
                 <List>
