@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from "@material-ui/core/Typography";

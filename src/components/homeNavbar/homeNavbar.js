@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from '@mui/material/IconButton';
@@ -114,7 +114,9 @@ class HomeNavbar extends Component {
                 >
                     {/* Menu options if you're logged out */}
                      <MenuItem>
-                        <LoginIcon /> Login
+                         <Link to="/code-in-one/login">  
+                            <LoginIcon /> Login
+                        </Link>
                      </MenuItem>
                 </Menu>
                 <Toolbar />
