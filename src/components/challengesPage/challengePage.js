@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import HomeNavbar from '../homeNavbar/homeNavbar';
 import ChallengeCard from '../challengeCard/challengeCard';
 
+import { getAllChallenges } from "../../services/challengeService";
+
 import './challengePage.css';
 
 class ChallengePage extends Component {
@@ -16,13 +18,11 @@ class ChallengePage extends Component {
     }
 
     componentDidMount() {
-        fetch("https://dhong9.pythonanywhere.com/api/challenges/")
-            .then(response => response.json())
-            .then(data => 
-                this.setState(_ => ({
-                    challenges: data.data
-                }))
-            );
+        getAllChallenges(data =>
+            this.setState(_ => ({
+                challenges: data.data.data
+            }))
+        );
     }
 
     render() {

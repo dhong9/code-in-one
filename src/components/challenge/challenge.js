@@ -21,6 +21,8 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 import ChallengeNavbar from "../challengeNavbar/challengeNavbar";
 
+import { getChallengeById } from "../../services/challengeService";
+
 export default function Challenge() {
     const params = useParams();
     const drawerWidth = 48;
@@ -28,9 +30,9 @@ export default function Challenge() {
     const [challengeData, setChallengeData] = useState({});
 
     useEffect(() =>
-        fetch("https://dhong9.pythonanywhere.com/api/challenges/" + params.id)
-            .then(response => response.json())
-            .then(data => setChallengeData(data.data)),
+        getChallengeById(params.id, 
+            data => setChallengeData(data.data.data)
+        ),
         [params.id]);
     
     const tabs = [
@@ -59,7 +61,7 @@ export default function Challenge() {
               <Box sx={{ overflow: 'auto' }}>
                 <List>
                 {tabs.map((element, index) => (
-                    <Tooltip title={element[1]} placement="right" arrow>
+                    <Tooltip key={index} title={element[1]} placement="right" arrow>
                         <ListItemButton disableGutters={true}>
                             <ListItem button key={index} disableGutters={true} sx={{justifyContent: "space-around"}}>
                                 <ListItemIcon sx={{minWidth: 0}}>
