@@ -13,6 +13,8 @@ import Container from "@material-ui/core/Container";
 
 import Copyright from "../copyright/copyright";
 
+import { addUser } from "../../services/userService";
+
 const useStyles = makeStyles(theme => ({
     "@global": {
       body: {
@@ -53,7 +55,7 @@ const useStyles = makeStyles(theme => ({
       }
       
       // Submit form data to the backend
-      console.log(formData);
+      addUser(formData, console.log);
     };
 
     const classes = useStyles();
