@@ -3,8 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -41,6 +39,23 @@ const useStyles = makeStyles(theme => ({
   }));
   
   export default function SignUpSide() {
+    const handleSubmit = event => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+
+      const formData = {
+        first_name: data.get("firstName"),
+        last_name: data.get("lastName"),
+        email: data.get("email"),
+        username: data.get("username"),
+        password: data.get("password"),
+        password2: data.get("password2")
+      }
+      
+      // Submit form data to the backend
+      console.log(formData);
+    };
+
     const classes = useStyles();
   
     return (
@@ -53,7 +68,7 @@ const useStyles = makeStyles(theme => ({
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -83,6 +98,17 @@ const useStyles = makeStyles(theme => ({
                   variant="outlined"
                   required
                   fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
@@ -102,9 +128,14 @@ const useStyles = makeStyles(theme => ({
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password2"
+                  label="Confirm Password"
+                  type="password"
+                  id="password2"
                 />
               </Grid>
             </Grid>
