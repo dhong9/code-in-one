@@ -20,6 +20,11 @@ import CodeIcon from '@mui/icons-material/Code';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 import ChallengeNavbar from "../challengeNavbar/challengeNavbar";
+import ChallengeDesc from "../challengeDesc/challengeDesc";
+import Comments from "../comments/comments";
+import Drafts from "../drafts/drafts";
+import Solutions from "../solutions/solutions";
+import Readme from "../readme/readme";
 
 import { getChallengeById } from "../../services/challengeService";
 
@@ -28,6 +33,7 @@ export default function Challenge() {
     const drawerWidth = 48;
 
     const [challengeData, setChallengeData] = useState({});
+    const [tabIndex, setTabIndex] = useState(0);
 
     useEffect(() =>
         getChallengeById(params.id, 
@@ -62,7 +68,7 @@ export default function Challenge() {
                 <List>
                 {tabs.map((element, index) => (
                     <Tooltip key={index} title={element[1]} placement="right" arrow>
-                        <ListItemButton disableGutters={true}>
+                        <ListItemButton disableGutters={true} onClick={_ => setTabIndex(index)} sx={{backgroundColor: index === tabIndex ? "LightSkyBlue" : "white"}}>
                             <ListItem button key={index} disableGutters={true} sx={{justifyContent: "space-around"}}>
                                 <ListItemIcon sx={{minWidth: 0}}>
                                     { element[0] }
@@ -76,9 +82,15 @@ export default function Challenge() {
           </Drawer>
           <Box component="main" sx={{ flexGrow: 1, p: 3}}>
             <Toolbar />
-            <div>
-                {challengeData.challengeDesc}
-            </div>
+            {[
+                <ChallengeDesc 
+                    challengeDesc={challengeData.challengeDesc}
+                />,
+                <Comments />,
+                <Drafts />,
+                <Solutions />,
+                <Readme />
+            ][tabIndex]}
           </Box>
         </Box>
     ) : (

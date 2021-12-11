@@ -53,6 +53,8 @@ const useStyles = makeStyles(theme => ({
         password: data.get("password"),
         password2: data.get("password2")
       }
+
+      console.log(formData)
       
       // Submit form data to the backend
       addUser(formData, console.log);

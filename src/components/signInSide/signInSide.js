@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { loginUser } from "../../services/userService";
+
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -34,9 +36,12 @@ export default function SignInSide() {
         const data = new FormData(event.currentTarget);
         
         // Submit form data to the backend
-        console.log({
-            email: data.get("email"),
+        const loginData = {
+            email: data.get("username"),
             password: data.get("password")
+        };
+        loginUser(loginData, data => {
+            console.log(data)
         });
     };
 
@@ -79,10 +84,10 @@ export default function SignInSide() {
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
+                                id="username"
+                                label="Username"
+                                name="username"
+                                autoComplete="username"
                                 autoFocus
                             />
                             <TextField
