@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Controlled as CodeMirror } from "react-codemirror2";
 import { useParams } from "react-router"
+import SplitPane from "react-split-pane";
 
 // External components
 import Box from '@mui/material/Box';
@@ -28,18 +30,29 @@ import Readme from "../readme/readme";
 
 import { getChallengeById } from "../../services/challengeService";
 
+require("codemirror/mode/xml/xml");
+require("codemirror/mode/javascript/javascript");
+require("codemirror/lib/codemirror.css");
+require("codemirror/theme/dracula.css");
+require("codemirror/theme/panda-syntax.css");
+require("codemirror/theme/material.css");
+
+
 export default function Challenge() {
     const params = useParams();
     const drawerWidth = 48;
 
     const [challengeData, setChallengeData] = useState({});
     const [tabIndex, setTabIndex] = useState(0);
+    const [codeData, setCodeData] = useState({});
 
     useEffect(() =>
         getChallengeById(params.id, 
             data => setChallengeData(data.data.data)
         ),
         [params.id]);
+    
+    const onChange = which => (editor, data, value) => setCodeData({ [`${which}Value`]: value });
     
     const tabs = [
         [<DescriptionIcon />, "Description"],
@@ -82,6 +95,7 @@ export default function Challenge() {
           </Drawer>
           <Box component="main" sx={{ flexGrow: 1, p: 3}}>
             <Toolbar />
+            <SplitPane split="vertical" defaultSize="50%">
             {[
                 <ChallengeDesc 
                     challengeDesc={challengeData.challengeDesc}
@@ -91,6 +105,22 @@ export default function Challenge() {
                 <Solutions />,
                 <Readme />
             ][tabIndex]}
+            <CodeMirror 
+                options={{
+                    theme: "panda-syntax",
+                    autoCloseBrackets: true,
+                    cursorScrollMargin: 48,
+                    mode: "javascript",
+                    lineNumbers: true,
+                    indentUnit: 2,
+                    tabSize: 2,
+                    styleActiveLine: true,
+                    viewportMargin: 99
+                }}
+                value={codeData.jsValue || ""}
+                onBeforeChange={onChange("js")}
+            />
+            </SplitPane>
           </Box>
         </Box>
     ) : (
